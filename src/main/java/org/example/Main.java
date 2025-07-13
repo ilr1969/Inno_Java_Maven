@@ -8,12 +8,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-
-        context.register(DataSourceConfig.class);
-        context.register(UserService.class);
-        context.registerBean(UserDao.class);
-        context.refresh();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext("example");
 
         UserService userService = context.getBean(UserService.class);
 
