@@ -5,9 +5,7 @@ import org.example.model.User;
 import org.example.service.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.sql.SQLException;
@@ -22,7 +20,7 @@ public class Main {
         UserService userService = context.getBean(UserService.class);
 
         System.out.println("=== Чистим таблицу на случай существования пользователей с прошлого дебага ===" + "\n");
-        userService.clearTable();
+        //userService.clearTable();
 
         System.out.println("=== Создаем пользователей ===");
         User u1 = userService.createUser("Петя");
@@ -46,3 +44,5 @@ public class Main {
         userService.getAllUsers().forEach(System.out::println);
     }
 }
+
+
