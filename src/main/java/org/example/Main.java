@@ -3,8 +3,10 @@ package org.example;
 
 import org.example.model.User;
 import org.example.service.UserService;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
@@ -15,7 +17,7 @@ import java.util.List;
 @EnableJpaRepositories(basePackages = "org.example.repository")
 public class Main {
     public static void main(String[] args) throws SQLException {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext("org.example");
+        ApplicationContext context = SpringApplication.run(Main.class);
 
         UserService userService = context.getBean(UserService.class);
 
@@ -42,7 +44,5 @@ public class Main {
 
         System.out.println("\n=== Итоговый список пользователей ===");
         userService.getAllUsers().forEach(System.out::println);
-
-        context.close();
     }
 }

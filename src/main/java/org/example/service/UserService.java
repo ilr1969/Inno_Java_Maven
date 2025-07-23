@@ -32,11 +32,17 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public String getUser(Long id) throws SQLException {
-        return userRepository.findById(id).get().getUsername();
+    public String getUser(Long id) {
+        try {
+            return userRepository.findById(id).get().getUsername();
+        }
+        catch (Exception e) {
+            return e.getMessage();
+        }
     }
 
     public List<User> getAllUsers() throws SQLException {
         return userRepository.findAll();
     }
+
 }

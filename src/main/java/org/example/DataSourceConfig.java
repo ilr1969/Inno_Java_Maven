@@ -24,14 +24,6 @@ public class DataSourceConfig {
 
     @Bean(destroyMethod = "close")
     public DataSource dataSource() {
-/*
-        HikariConfig config = new HikariConfig();
-
-        config.setJdbcUrl(connectionString);
-        config.setUsername(username);
-        config.setPassword(password);
-*/
-
 
         return DataSourceBuilder.create()
                 .url(url)
