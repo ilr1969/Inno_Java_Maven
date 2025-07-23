@@ -1,17 +1,27 @@
 package org.example;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 
-@RequiredArgsConstructor
 @Configuration
 public class DataSourceConfig {
 
-    private final DataClass dataClass;
+    @Value("${spring.datasource.url}")
+    private String url;
+
+    @Value("${spring.datasource.username}")
+    private String username;
+
+    @Value("${spring.datasource.password}")
+    private String password;
+
+    @Value("${spring.datasource.driver-class-name}")
+    private String driverClassName;
 
     @Bean(destroyMethod = "close")
     public DataSource dataSource() {
@@ -25,10 +35,10 @@ public class DataSourceConfig {
 
 
         return DataSourceBuilder.create()
-                .url(dataClass.getUrl())
-                .username(dataClass.getUsername())
-                .password(dataClass.getPassword())
-                .driverClassName(dataClass.getDriverClassName())
+                .url(url)
+                .username(username)
+                .password(password)
+                .driverClassName(driverClassName)
                 .build();
     }
 }

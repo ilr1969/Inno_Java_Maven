@@ -13,7 +13,6 @@ import java.util.List;
 
 @SpringBootApplication(scanBasePackages = {"org.example"})
 @EnableJpaRepositories(basePackages = "org.example.repository")
-@EnableConfigurationProperties(DataClass.class)
 public class Main {
     public static void main(String[] args) throws SQLException {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext("org.example");
