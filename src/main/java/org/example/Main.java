@@ -1,14 +1,22 @@
-package example;
+package org.example;
 
 
+import org.example.model.User;
+import org.example.service.UserService;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.sql.SQLException;
 import java.util.List;
 
+@SpringBootApplication(scanBasePackages = {"org.example"})
+@EnableJpaRepositories(basePackages = "org.example.repository")
+@EnableConfigurationProperties(DataClass.class)
 public class Main {
     public static void main(String[] args) throws SQLException {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext("example");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext("org.example");
 
         UserService userService = context.getBean(UserService.class);
 
@@ -30,8 +38,8 @@ public class Main {
         System.out.println(userService.getUser(100L)); //возвращаем id=100, которого не должно быть в БД
 
         System.out.println("\n=== Удаляем пользователя ===");
-        boolean deleted = userService.deleteUser(u2.getId());
-        System.out.println("Deleted: " + deleted);
+        userService.deleteUser(u2.getId());
+        System.out.println("Deleted: " + u2.getId());
 
         System.out.println("\n=== Итоговый список пользователей ===");
         userService.getAllUsers().forEach(System.out::println);
